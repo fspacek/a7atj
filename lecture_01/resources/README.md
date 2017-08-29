@@ -44,7 +44,7 @@
 ## Java Enterprise Edition (EE) - What's this about?
 * Standardization of enterprise/web components
 
-> "Java EE is a platform which defines 'standard specifications/APIs' which are then implemented by vendors and used for development of enterprise (distributed, 'multi*tired', robust) 'applications'.
+> "Java EE is a platform which defines 'standard specifications/APIs' which are then implemented by vendors and used for development of enterprise (distributed, 'multi-tier', robust) 'applications'.
 > These applications are composed of modules or 'components' which use Java EE 'containers' as their run*time infrastructure."
 
 * vendor independent, however Java EE lead is (was?) Oracle
