@@ -3,7 +3,6 @@ package cz.edhouse.javaee;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.logging.Level;
 import javax.servlet.AsyncContext;
 import javax.servlet.AsyncEvent;
 import javax.servlet.AsyncListener;
@@ -27,7 +26,7 @@ public class AsyncServlet extends HttpServlet {
     private ExecutorService executor;
 
     @Override
-    protected void init() throws ServletException {
+    public void init() throws ServletException {
         this.executor = Executors.newSingleThreadExecutor();
     }
 
