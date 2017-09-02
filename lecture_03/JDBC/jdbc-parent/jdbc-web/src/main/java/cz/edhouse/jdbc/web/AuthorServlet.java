@@ -1,7 +1,6 @@
 package cz.edhouse.jdbc.web;
 
 import com.google.gson.Gson;
-import cz.edhouse.jdbc.DataSourceHolder;
 import cz.edhouse.jdbc.dao.impl.AuthorDaoImpl;
 import cz.edhouse.jdbc.dao.impl.PostDaoImpl;
 import cz.edhouse.jdbc.dto.PostDto;
@@ -11,11 +10,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 /**
  * Simple servlet which returns list of stored authors on GET and via POST request new posts for stored authors can be
@@ -31,10 +33,10 @@ public class AuthorServlet extends HttpServlet {
     private AuthorService authorService;
 
     @Override
-    public void init() throws ServletException {
-        this.authorService = new AuthorServiceImpl(
-                new AuthorDaoImpl(DataSourceHolder.getDataSource()),
-                new PostDaoImpl(DataSourceHolder.getDataSource()));
+    public void init(ServletConfig config) throws ServletException {
+        final ServletContext context = config.getServletContext();
+        final DataSource dataSource = (DataSource) context.getAttribute("dataSource");
+        this.authorService = new AuthorServiceImpl(new AuthorDaoImpl(dataSource), new PostDaoImpl(dataSource));
     }
 
     /**
@@ -55,7 +57,7 @@ public class AuthorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostDto post = null;
+        PostDto post;
         try (InputStream is = request.getInputStream()) {
             post = new Gson().fromJson(new InputStreamReader(is), PostDto.class);
         }
