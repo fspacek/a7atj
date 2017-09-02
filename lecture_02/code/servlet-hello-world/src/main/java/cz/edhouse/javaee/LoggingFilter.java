@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Frantisek Spacek
  */
-@WebFilter(filterName = "LoggingFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "LoggingFilter", urlPatterns = {"/*"}, asyncSupported = true)
 public class LoggingFilter implements Filter {
 
     private static final Logger LOG = LoggerFactory.getLogger(LoggingFilter.class);
