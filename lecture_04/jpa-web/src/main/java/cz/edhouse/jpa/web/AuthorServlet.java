@@ -1,7 +1,6 @@
 package cz.edhouse.jpa.web;
 
 import com.google.gson.Gson;
-import cz.edhouse.jpa.EntityManagerFactory;
 import cz.edhouse.jpa.dao.impl.AuthorDaoImpl;
 import cz.edhouse.jpa.dao.impl.PostDaoImpl;
 import cz.edhouse.jpa.dto.PostDto;
@@ -12,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import javax.persistence.EntityManager;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +41,7 @@ public class AuthorServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType(JSON_MEDIA_TYPE);
-        final AuthorService authorService = createAuthorService();
+        final AuthorService authorService = createAuthorService(request.getServletContext());
 
         final String command = request.getParameter("command");
         if (command == null) {
@@ -70,7 +70,8 @@ public class AuthorServlet extends HttpServlet {
             return;
         }
 
-        post = createAuthorService().createPostFor(Integer.valueOf(request.getParameter("authorId")), post);
+        post = createAuthorService(request.getServletContext())
+                .createPostFor(Integer.valueOf(request.getParameter("authorId")), post);
         writeAsJson(response, post);
     }
 
@@ -104,8 +105,8 @@ public class AuthorServlet extends HttpServlet {
         }
     }
 
-    private AuthorService createAuthorService() {
-        final EntityManager em = EntityManagerFactory.getEntityManager();
+    private AuthorService createAuthorService(ServletContext context) {
+        final EntityManager em = (EntityManager) context.getAttribute("entityManager");
         final AuthorService authorService = new AuthorServiceImpl(
                 new AuthorDaoImpl(em),
                 new PostDaoImpl(em));
