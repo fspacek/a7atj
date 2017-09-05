@@ -1,6 +1,6 @@
 # A7ATJ - Applied Java Technologies
 
-This repository contains materials for Applied Java Technologies course held at the [Faculty of Applied Informatics of Thomas Bata University in Zlin, Czech Republic](http://www.utb.cz/fai-en)
+This repository contains materials for Applied Java Technologies course held at the [Faculty of Applied Informatics of Thomas Bata University in Zlin, Czech Republic](http://www.utb.cz/fai-en).
 
 The course targets basic principles, tools and frameworks of Java Enterprise technologies. 
 The student will learn the typical layered application architecture and the libraries used for implementing the specific layers. The lectures and computer laboratories sessions will cover the following topics:
@@ -19,8 +19,7 @@ The student will learn the typical layered application architecture and the libr
 13. Managing application settings, configuration and management of aplication logs, monitoring application health.
 14. Clean and sustainable code. Documentation, conventions, checkstyle tool.
 
-
-Resources:
+### Resources:
 * GUPTA, Arun. Java EE 7 Essentials. First edition. Sebastopol, CA: O´Reilly Media, 2013. ISBN 9781449370176. 
 * WALLS, Craig. Spring in action. Fourth Edition. ISBN 161729120X.
 * JENDROCK, Eric, Ricardo CERVERA-NAVARRO, Ian EVANS, Kim HAASE a William MARKITO. The Java EE 7 tutorial. Fifth edition. Upper Saddle River, NJ: Addison-Wesley, 2014. ISBN 0321980085.

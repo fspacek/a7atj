@@ -37,7 +37,8 @@
    * Web - provides public application API/interface 
    * Service - contains business logic
    * Repository - bridge between persistence storage and application
-* good architecture should follow business needs of application, and should not be about current architect assigned to the project
+* layers are not always 1:1 (ideally should not be) mapped to packages
+* good architecture should follow business needs of application
 
 ![Typical architecture](typical-architecture.png)
 
@@ -52,7 +53,7 @@
 * defined by experts in the field
 * Latest version EE 7 (Jul 2013, defined by JSR 342)
 * Glassfish 4 - reference implementation for Java EE 7
-* Java EE 8 (JSR 366) almost finished (hopefully to the end of 2017)
+* Java EE 8 specification (JSR 366) finished, reference implementation in Glassfish 5 is not yet completed.
 
 ## Java EE profiles
 * There are two profiles of Java EE
