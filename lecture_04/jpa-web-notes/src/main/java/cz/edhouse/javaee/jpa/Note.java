@@ -9,8 +9,11 @@ import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
 import javax.json.JsonObjectBuilder;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
@@ -23,15 +26,19 @@ import javax.persistence.Table;
 @Entity
 @Table
 @NamedQueries({
-    @NamedQuery(name = "Note.getAll", query = "select n from Note n"),
+    @NamedQuery(name = "Note.getAll", query = "select n from Note n")
+    ,
     @NamedQuery(name = "Note.getOne", query = "select n from Note n where n.id = :id")
-})
+    ,
+         @NamedQuery(name = "Note.getAllWithOwner", query = "select n from Note n where n.owner = :owner"),})
 
 public class Note implements Serializable {
 
     private long id;
     private String title;
     private String text;
+
+    private Owner owner;
 
     @Id
     @GeneratedValue(generator = "note_seq")
@@ -58,6 +65,16 @@ public class Note implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
     }
 
     @Override

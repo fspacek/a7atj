@@ -64,7 +64,6 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final NoteManager noteManager = createNoteManager(req.getServletContext());
-
         final String id = req.getParameter("id");
         if (id != null) {
             final Optional<Note> foundNote = noteManager.getOne(Long.valueOf(id));
@@ -76,6 +75,13 @@ public class NoteServlet extends HttpServlet {
             }
             return;
         }
+
+        final String ownerId = req.getParameter("ownerId");
+        if (ownerId != null) {
+            writeJson(resp, Note.toJson(noteManager.getAllForOwner(Long.parseLong(ownerId))));
+            return;
+        }
+
         writeJson(resp, Note.toJson(noteManager.getAll()));
     }
 
