@@ -16,6 +16,7 @@ public class NoteManager {
     @Inject
     private EntityManager entityManager;
 
+    @LogAround
     public List<Note> getAll() {
         return entityManager.createNamedQuery("Note.getAll", Note.class)
                 .getResultList();
