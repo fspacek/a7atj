@@ -1,30 +1,22 @@
 package cz.fai.blog.web;
 
-import cz.fai.blog.dto.PostDto;
-import cz.fai.blog.manager.PostManager;
-
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
- * Created by Radomir Sohlich on 10/29/16.
+ * Created by Radomir Sohlich on 10/22/16.
  */
-@Named
-@RequestScoped
-public class IndexController {
+@WebServlet(urlPatterns = "index")
+public class IndexController extends HttpServlet {
 
-    private PostManager postManager;
-
-    @Inject
-    public void setPostManager(PostManager postManager) {
-        this.postManager = postManager;
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        getServletContext()
+                .getRequestDispatcher("/pages/index.jsp")
+                .forward(req, resp);
     }
-
-
-    public List<PostDto> getAllPosts() {
-        return postManager.getAllPublished();
-    }
-
 }

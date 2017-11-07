@@ -65,7 +65,6 @@ public class PostDto extends BaseDto<Integer> {
         entity.setTitle(dto.getTitle());
         entity.setContent(dto.getContent());
         entity.setCreateDate(dto.getCreateDate());
-        entity.setPublished(dto.isPublished());
         return entity;
     }
 

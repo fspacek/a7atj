@@ -1,50 +1,72 @@
 package cz.fai.blog.web;
 
+import cz.fai.blog.bean.SessionBean;
 import cz.fai.blog.dto.AuthorDto;
 import cz.fai.blog.manager.AuthorManager;
 
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.inject.Named;
 import java.io.IOException;
 
 /**
- * Created by Radomir Sohlich on 10/24/16.
+ * Created by Radomir Sohlich on 10/29/16.
  */
-@WebServlet(urlPatterns = "login")
-public class LoginController extends HttpServlet {
+@Named
+@RequestScoped
+public class LoginController {
 
+    private String login;
+    private String password;
+
+    @Inject
     private AuthorManager authorManager;
 
     @Inject
-    public void setAuthorManager(AuthorManager authorManager) {
-        this.authorManager = authorManager;
+    private SessionBean sessionBean;
+
+
+    public String doLogout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return "login.xhtml?faces-redirect=true";
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/pages/login.jsp").forward
-                (req, resp);
-    }
-
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
+    public String doLogin() throws IOException {
         AuthorDto authorDto = authorManager.getByEmailAndPassword(login,
                 password);
         if (authorDto != null) {
-            req.getSession(true).setAttribute("user", authorDto);
-            resp.sendRedirect("index");
+            sessionBean.setUser(authorDto);
+            return "index.xhtml?faces-redirect=true";
         } else {
-            req.setAttribute("failed", true);
-            getServletContext().getRequestDispatcher
-                    ("/pages/login.jsp").forward(req, resp);
+            return "login.xhtml?faces-redirect=true";
         }
     }
 
+    public void validateLogin(FacesContext context, UIComponent component,
+                              Object value) throws ValidatorException {
+        if (value == null || ((String) value).isEmpty()) {
+            throw new ValidatorException(new FacesMessage("login cannot be " +
+                    "null"));
+        }
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -3,15 +3,14 @@
 package cz.fai.blog.util;
 
 import com.google.gson.Gson;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
+ *
  * @author František Špaček
  */
 public final class JsonUtil {
@@ -33,13 +32,6 @@ public final class JsonUtil {
     public static void writeJson(HttpServletResponse resp, Object obj) throws IOException {
         resp.setContentType(APPLICATION_JSON);
         try (PrintWriter writer = resp.getWriter()) {
-            new Gson().toJson(obj, writer);
-        }
-    }
-
-    public static void writeJson(OutputStream os, Object obj) throws
-            IOException {
-        try (PrintWriter writer = new PrintWriter(os)) {
             new Gson().toJson(obj, writer);
         }
     }

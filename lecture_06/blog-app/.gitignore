@@ -9,8 +9,9 @@ dist/
 nbdist/
 .nb-gradle/
 .idea
-*.iml
 nb-configuration.xml
+blog-app.iml
+
 
 ### Maven ###
 target/

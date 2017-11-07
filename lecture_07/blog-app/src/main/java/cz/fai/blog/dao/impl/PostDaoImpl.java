@@ -9,9 +9,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Named
@@ -45,10 +42,7 @@ public class PostDaoImpl extends SimpleCrudDao<PostEntity, Integer> implements P
 
     @Override
     public List<PostEntity> fetchAllPublished() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<PostEntity> query = cb.createQuery(PostEntity.class);
-        Root<PostEntity> c = query.from(PostEntity.class);
-        query.where(cb.equal(c.get("published"), true));
-        return entityManager.createQuery(query).getResultList();
+        return entityManager.createNamedQuery("getAllPublished", PostEntity.class)
+                .getResultList();
     }
 }
