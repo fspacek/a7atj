@@ -28,10 +28,10 @@ public class NoteManager {
                 .getResultList();
     }
 
-    public Optional<Note> getOne(long id) {
-        return Optional.ofNullable(entityManager.createNamedQuery("Note.getOne", Note.class)
+    public Note getOne(long id) {
+        return entityManager.createNamedQuery("Note.getOne", Note.class)
                 .setParameter("id", id)
-                .getSingleResult());
+                .getSingleResult();
     }
 
     public Note create(Note note) {

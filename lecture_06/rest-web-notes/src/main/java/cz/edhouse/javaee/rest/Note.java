@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -26,8 +28,10 @@ import javax.persistence.Table;
 @Entity
 @Table
 @NamedQueries({
-    @NamedQuery(name = "Note.getAll", query = "select n from Note n"),
-    @NamedQuery(name = "Note.getOne", query = "select n from Note n where n.id = :id"),
+    @NamedQuery(name = "Note.getAll", query = "select n from Note n")
+    ,
+    @NamedQuery(name = "Note.getOne", query = "select n from Note n where n.id = :id")
+    ,
     @NamedQuery(name = "Note.getAllWithOwner", query = "select n from Note n where n.owner = :owner")})
 public class Note implements Serializable {
 
@@ -48,6 +52,8 @@ public class Note implements Serializable {
         this.id = id;
     }
 
+    @NotNull
+    @Size(min = 1, max = 255)
     public String getTitle() {
         return title;
     }
@@ -56,6 +62,8 @@ public class Note implements Serializable {
         this.title = title;
     }
 
+    @NotNull
+    @Size(min = 1, max = 4000)
     public String getText() {
         return text;
     }
