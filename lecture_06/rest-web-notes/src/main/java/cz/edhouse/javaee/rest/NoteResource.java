@@ -4,6 +4,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -34,7 +35,7 @@ public class NoteResource {
     }
 
     @POST
-    public Response create(@NotNull Note note) {
+    public Response create(@NotNull @Valid Note note) {
         return Response.ok(Note.toJson(noteManager.create(note))).build();
     }
 
