@@ -133,7 +133,7 @@ and provides a means for identifying the custom tags in your JSP page
     ${ns:length("Some text")} 
 ```
 
-JSP - typical architecture
+### JSP - typical architecture
 
 - MVC pattern
 - servlet process request and executes logic
@@ -156,9 +156,10 @@ Other template engines
   - http://richfaces.jboss.org/
   - https://www.primefaces.org/
   - http://www.icesoft.org/java/home.jsf
-Facelets
+### Facelets
 - Template engine designed for JSF
 - It replaced JSP, which was used for JSF 1.x
+```
        <?xml version='1.0' encoding='UTF-8' ?>
         <!DOCTYPE html
             PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -171,7 +172,7 @@ Facelets
       Hello from Facelets
     </h:body>
     </html>
-
+```
 
 - Facelets provides Expression Language (EL) integration. This allows two-way data binding between the backing beans and the UI:
     Hello from Facelets, my name is #{name.value}!
@@ -193,20 +194,21 @@ Navigation Rules
 - JSF defines implicit and explicit navigation rules
 
 Implicit
-
+```
     <h:commandButton action="note" value="Show Note"/>
-
+```
 Explicit
-
-     <navigation-rule>
-            <from-view-id>index.xhtml</from-view-id>
-            <navigation-case>
-                <from-outcome>note</from-outcome>
-                <to-view-id>note.xhtml</to-view-id>
-            </navigation-case>
-              <from-view-id>note.xhtml</from-view-id>
-            <navigation-case>
-                <from-outcome>index</from-outcome>
-                <to-view-id>index.xhtml</to-view-id>
-            </navigation-case>
-        </navigation-rule>
+```
+<navigation-rule>
+    <from-view-id>index.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>note</from-outcome>
+        <to-view-id>note.xhtml</to-view-id>
+    </navigation-case>
+    <from-view-id>note.xhtml</from-view-id>
+    <navigation-case>
+    <from-outcome>index</from-outcome>
+    <to-view-id>index.xhtml</to-view-id>
+    </navigation-case>
+</navigation-rule>
+```
