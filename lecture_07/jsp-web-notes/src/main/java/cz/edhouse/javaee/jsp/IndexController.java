@@ -22,14 +22,12 @@ public class IndexController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         final String action = req.getParameter("action");
         if ("delete".equals(action)) {
-
             if (req.getParameter("id") != null) {
                 noteManager.delete(Long.valueOf(req.getParameter("id")));
                 resp.sendRedirect("");
                 return;
             }
         }
-
         req.setAttribute("notes", noteManager.getAll());
         getServletContext()
                 .getRequestDispatcher("/index.jsp")

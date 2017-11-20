@@ -11,11 +11,14 @@
         <c:forEach items="${notes}" var="note">
             <div class="panel panel-success">
                 <div class="panel-heading"><c:out value="${note.title}"/>   
-                    <span class="pull-right">
+                    <div class="pull-right">
+                         <a style="text-decoration: none" href="note?id=<c:out value='${note.id}'/>">
+                            <i class="material-icons">edit</i>
+                        </a>
                         <a class="text-danger" href="?action=delete&id=<c:out value='${note.id}'/>">
                             <i class="material-icons">clear</i>
                         </a>
-                    </span>
+                    </div>
                 </div>
                 <div class="panel-body"> <c:out value="${note.text}"/></div>
             </div>

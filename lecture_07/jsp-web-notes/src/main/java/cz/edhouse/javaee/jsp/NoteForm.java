@@ -49,4 +49,9 @@ public class NoteForm {
         note.setTitle(noteForm.getTitle());
         return note;
     }
+
+    @Override
+    public String toString() {
+        return "NoteForm{" + "id=" + id + ", title=" + title + ", text=" + text + '}';
+    }
 }
