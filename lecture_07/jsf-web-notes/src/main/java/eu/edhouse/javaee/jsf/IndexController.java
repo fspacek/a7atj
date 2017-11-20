@@ -46,7 +46,6 @@ public class IndexController {
         noteManager.delete(id);
         notes = noteManager.getAll();
     }
-
     public String addNote() {
         return "note";
     }

@@ -13,20 +13,24 @@
 
         <div class="row">
             <h:form>
-            <ui:repeat var="note" value="#{indexController.notes}">
-                <div class="panel panel-success">
-                    <div class="panel-heading">
-                        <h:outputText value="#{note.title}"/>   
-                        <span class="pull-right">
-                            <h:commandLink styleClass="text-danger" action="#{indexController.deleteNote}">
-                                <f:param name="id" value="#{note.id}" />
-                                <i class="material-icons">clear</i>
-                            </h:commandLink>
-                        </span>
+                <ui:repeat var="note" value="#{indexController.notes}">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h:outputText value="#{note.title}"/>   
+                            <span class="pull-right">
+                                <h:link outcome="note">
+                                    <f:param name="id" value="#{note.id}" />
+                                    <i class="material-icons">edit</i>
+                                </h:link>
+                                <h:commandLink styleClass="text-danger" action="#{indexController.deleteNote}">
+                                    <f:param name="id" value="#{note.id}" />
+                                    <i class="material-icons">clear</i>
+                                </h:commandLink>
+                            </span>
+                        </div>
+                        <div class="panel-body"> <h:outputText value="#{note.text}"/></div>
                     </div>
-                    <div class="panel-body"> <h:outputText value="#{note.text}"/></div>
-                </div>
-            </ui:repeat>
+                </ui:repeat>
             </h:form>
         </div>
     </ui:define>

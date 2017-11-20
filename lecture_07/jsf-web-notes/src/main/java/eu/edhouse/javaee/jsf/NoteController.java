@@ -1,6 +1,7 @@
 package eu.edhouse.javaee.jsf;
 
 import java.util.Set;
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -26,6 +27,21 @@ public class NoteController {
     @Inject
     private Validator validator;
 
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @PostConstruct
+    public void load() {
+        noteForm = NoteForm.from(noteManager.getOne(id));
+    }
+
     public String save() {
         final Note toEntity = NoteForm.toEntity(noteForm);
         final Set<ConstraintViolation<Note>> validate = validator.validate(toEntity);
@@ -34,7 +50,11 @@ public class NoteController {
         }
 
         if (validate.isEmpty()) {
-            noteManager.create(toEntity);
+            if (toEntity.getId() == null) {
+                noteManager.create(toEntity);
+            } else {
+                noteManager.update(toEntity);
+            }
             return "index";
         }
         return "note";
