@@ -36,6 +36,9 @@ public class AuthorManagerImpl implements AuthorManager {
 
     @Override
     public AuthorDto createAuthor(AuthorDto authorDto) {
+        if(authorDto == null){
+            throw new IllegalArgumentException("authorDto cannot be null");
+        }
         final AuthorEntity entity = new AuthorEntity();
         entity.setEmail(authorDto.getEmail());
         entity.setFirstName(authorDto.getFirstName());

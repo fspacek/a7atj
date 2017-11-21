@@ -1,0 +1,11 @@
+cz/edhouse/javaee/rest/WebSocketsEndpoint.class
+cz/edhouse/javaee/rest/LogAround.class
+cz/edhouse/javaee/rest/ApplicationConfig.class
+cz/edhouse/javaee/rest/DatabaseMigrator.class
+cz/edhouse/javaee/rest/Note.class
+cz/edhouse/javaee/rest/NoteResource.class
+cz/edhouse/javaee/rest/DummyDataInitializator.class
+cz/edhouse/javaee/rest/EJBExceptionMapper.class
+cz/edhouse/javaee/rest/Owner.class
+cz/edhouse/javaee/rest/LoggingInterceptor.class
+cz/edhouse/javaee/rest/NoteManager.class

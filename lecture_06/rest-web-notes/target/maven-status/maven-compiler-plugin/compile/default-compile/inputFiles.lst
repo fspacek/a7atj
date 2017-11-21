@@ -1,0 +1,11 @@
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/LoggingInterceptor.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/Note.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/NoteResource.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/ApplicationConfig.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/LogAround.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/DummyDataInitializator.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/DatabaseMigrator.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/Owner.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/EJBExceptionMapper.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/WebSocketsEndpoint.java
+/Users/expi/Documents/Lectures/a7atj/lecture_06/rest-web-notes/src/main/java/cz/edhouse/javaee/rest/NoteManager.java

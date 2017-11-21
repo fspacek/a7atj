@@ -18,6 +18,7 @@ public class AuthorDaoImpl extends SimpleCrudDao<AuthorEntity, Integer> implemen
     }
 
 
+    @Override
     public AuthorEntity findByEmailAndPassword(String email, String password) {
         return entityManager.createQuery("select a from AuthorEntity a where a.email=:email and a.password=:password",
                 AuthorEntity.class)

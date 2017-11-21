@@ -2,11 +2,13 @@ package cz.fai.blog.dto;
 
 import cz.fai.blog.domain.PostEntity;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * @author Frantisek Spacek
  */
+@XmlRootElement
 public class PostDto extends BaseDto<Integer> {
 
     private String title;
