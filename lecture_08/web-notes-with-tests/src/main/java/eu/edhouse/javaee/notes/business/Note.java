@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -27,8 +28,17 @@ public class Note implements Serializable {
     private String title;
     private String text;
 
+    public Note() {
+    }
+
+    public Note(String title, String text) {
+        this.title = title;
+        this.text = text;
+    }
+    
+
     @Id
-    @GeneratedValue(generator = "note_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @SequenceGenerator(name = "note_seq", sequenceName = "NOTE_SEQ", allocationSize = 1)
     public Long getId() {
         return id;

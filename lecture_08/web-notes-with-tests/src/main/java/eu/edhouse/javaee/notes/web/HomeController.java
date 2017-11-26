@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Frantisek Spacek
  */
 @WebServlet(urlPatterns = "/home")
-public class IndexController extends HttpServlet {
+public class HomeController extends HttpServlet {
 
     @Inject
     private NoteManager noteManager;

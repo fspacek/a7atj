@@ -12,9 +12,13 @@ import javax.persistence.PersistenceContext;
 @Stateless
 public class NoteManager {
 
-    @PersistenceContext(unitName = "default")
     private EntityManager entityManager;
 
+    @PersistenceContext(unitName = "default")
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    
     public List<Note> getAll() {
         return entityManager.createNamedQuery("Note.getAll", Note.class)
                 .getResultList();
