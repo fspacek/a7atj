@@ -41,19 +41,6 @@ public class NoteManagerIT {
     @PersistenceContext
     private EntityManager em;
 
-    @Inject
-    private UserTransaction utx;
-
-    @Before
-    public void setUp() throws Exception {
-        utx.begin();
-        em.joinTransaction();
-        
-        em.persist(new Note("test 1", "test text"));
-        utx.commit();
-        em.clear();
-    }
-
     @Test
     public void testGetAll() throws Exception {
         assertFalse(instance.getAll().isEmpty());
