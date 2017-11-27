@@ -25,7 +25,7 @@ public class HomeControllerIT {
 
     @Deployment(testable = false)
     public static WebArchive createDeployment() {
-        final WebArchive war = ShrinkWrap.create(MavenImporter.class)
+        final WebArchive war = ShrinkWrap.create(MavenImporter.class, "homeController.war")
                 .loadPomFromFile("pom.xml")
                 .importBuildOutput()
                 .as(WebArchive.class);
