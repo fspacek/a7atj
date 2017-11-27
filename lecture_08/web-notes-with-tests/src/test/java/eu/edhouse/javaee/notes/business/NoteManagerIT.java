@@ -3,9 +3,6 @@ package eu.edhouse.javaee.notes.business;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.NotSupportedException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -28,7 +25,7 @@ public class NoteManagerIT {
     @Deployment
     public static WebArchive createDeployment() {
         final WebArchive war = ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(Note.class, NoteManager.class)
+                .addClasses(Note.class, NoteManager.class, TestDataInitializer.class)
                 .addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
         war.writeTo(System.out, Formatters.VERBOSE);
@@ -37,9 +34,6 @@ public class NoteManagerIT {
 
     @Inject
     private NoteManager instance;
-
-    @PersistenceContext
-    private EntityManager em;
 
     @Test
     public void testGetAll() throws Exception {

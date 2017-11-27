@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp" />
 <div class="row">
     <span class="pull-right" style="margin-bottom: 5px">
-        <a class="btn btn-primary" href="note" role="button">Add Note</a>
+        <a id="addNote" class="btn btn-primary" href="note" role="button">Add Note</a>
     </span>
 </div>
 
