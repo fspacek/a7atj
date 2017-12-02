@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian>
+
+    <!-- clip -->
+    <extension qualifier="webdriver">
+        <property name="browser">firefox</property>
+    </extension>
+    <!-- clip -->
+
+</arquillian>
