@@ -32,15 +32,14 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         final String extractedPath = getHttpRequest(request).getRequestURI().replace(contextPath, "");
-        System.out.println(extractedPath);
-
         final boolean loggedIn = (getHttpRequest(request).getRemoteUser() != null);
         // check if the URL was appointed to login URL or not
         final boolean loginRequest = getHttpRequest(request).getRequestURI().equals(loginUrl);
         // check if the URL was allowed or not
         final boolean allowedUrl = checkIfIsAllowedPath(extractedPath);
         if (loggedIn || loginRequest || allowedUrl) {
-            request.setAttribute("logged", loggedIn);
+            request.setAttribute("loggedUser", getHttpRequest(request).getUserPrincipal());
+
             chain.doFilter(request, response);
         } else {
             ((HttpServletResponse) response).sendRedirect("login");

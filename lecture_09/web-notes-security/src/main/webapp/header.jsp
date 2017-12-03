@@ -12,12 +12,16 @@
 <body>
 <div class="container">
     <div class="header clearfix">
-        <c:if test="${logged}">
+        <c:if test="${loggedUser != null}">
             <nav>
                 <ul class="nav nav-pills pull-right">
                     <li role="presentation">
+                        <div><c:out value="${loggedUser.owner.firstname}"/>
+                            <c:out value="${loggedUser.owner.lastname}"/></div>
+                    </li>
+                    <li role="presentation">
                         <form method="POST" action="login">
-                            <input id="logout" value="true" type="hidden">
+                            <input name="logout" value="" type="hidden">
                             <button class="btn btn-default" type="submit">Logout</button>
                         </form>
                     </li>

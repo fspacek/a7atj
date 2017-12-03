@@ -1,17 +1,19 @@
 package eu.edhouse.javaee.notes.security;
 
+import eu.edhouse.javaee.notes.business.Owner;
+
 import javax.security.enterprise.CallerPrincipal;
 
 public class UserCallerPrincipal extends CallerPrincipal {
 
-    private final Long userId;
+    private final Owner owner;
 
-    public UserCallerPrincipal(String name, Long userId) {
+    public UserCallerPrincipal(String name, Owner owner) {
         super(name);
-        this.userId = userId;
+        this.owner = owner;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Owner getOwner() {
+        return owner;
     }
 }

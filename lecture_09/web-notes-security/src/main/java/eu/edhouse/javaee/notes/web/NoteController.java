@@ -2,7 +2,6 @@ package eu.edhouse.javaee.notes.web;
 
 import eu.edhouse.javaee.notes.business.Note;
 import eu.edhouse.javaee.notes.business.NoteManager;
-import eu.edhouse.javaee.notes.business.Owner;
 import eu.edhouse.javaee.notes.security.UserCallerPrincipal;
 
 import javax.inject.Inject;
@@ -23,7 +22,7 @@ import java.util.Set;
  * @author Frantisek Spacek
  */
 @WebServlet(urlPatterns = "/note")
-@ServletSecurity(@HttpConstraint(rolesAllowed = "user"))
+@ServletSecurity(@HttpConstraint(rolesAllowed = "admin"))
 public class NoteController extends HttpServlet {
 
     @Inject
@@ -50,7 +49,7 @@ public class NoteController extends HttpServlet {
         }
 
         final UserCallerPrincipal callerPrincipal = (UserCallerPrincipal) securityContext.getCallerPrincipal();
-        entity.setOwner(new Owner(callerPrincipal.getUserId()));
+        entity.setOwner(callerPrincipal.getOwner());
         if (entity.getId() == null) {
             noteManager.create(entity);
         } else {
@@ -67,7 +66,6 @@ public class NoteController extends HttpServlet {
         } else {
             noteForm = NoteForm.from(noteManager.getOne(Long.valueOf(req.getParameter("id"))));
         }
-        System.out.println(noteForm);
         req.setAttribute("form", noteForm);
         getServletContext()
                 .getRequestDispatcher("/note.jsp")

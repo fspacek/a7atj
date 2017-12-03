@@ -18,8 +18,9 @@ public class NoteManager {
         this.entityManager = entityManager;
     }
 
-    public List<Note> getAll() {
-        return entityManager.createNamedQuery("Note.getAll", Note.class)
+    public List<Note> getAllForOwner(Owner owner) {
+        return entityManager.createNamedQuery("Note.getAllForOwner", Note.class)
+                .setParameter("owner", owner)
                 .getResultList();
     }
 

@@ -35,7 +35,7 @@ public class NoteManagerIT {
 
     @Test
     public void testGetAll() throws Exception {
-        assertFalse(instance.getAll().isEmpty());
+        assertFalse(instance.getAllForOwner(new Owner(1L)).isEmpty());
     }
 
     @Test

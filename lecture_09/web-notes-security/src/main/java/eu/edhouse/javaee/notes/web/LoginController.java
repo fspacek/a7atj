@@ -33,8 +33,9 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if ("true".equals(req.getParameter("logout"))) {
+        if (req.getParameter("logout") != null) {
             req.logout();
+            req.setAttribute("loggedUser", null);
             forwardToLogin(req, resp);
             return;
         }

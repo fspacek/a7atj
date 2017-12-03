@@ -12,7 +12,7 @@ import java.util.Objects;
 @Entity
 @Table
 @NamedQueries({
-        @NamedQuery(name = "Note.getAll", query = "select n from Note n"),
+        @NamedQuery(name = "Note.getAllForOwner", query = "select n from Note n where n.owner = :owner"),
         @NamedQuery(name = "Note.getOne", query = "select n from Note n where n.id = :id")})
 public class Note implements Serializable {
 

@@ -35,7 +35,7 @@ public class UserIdentityStore implements IdentityStore {
             final UsernamePasswordCredential upCredential = (UsernamePasswordCredential) credential;
             final Owner owner = ownerManager.getUserByName(upCredential.getCaller());
             if (owner != null && isPasswordValid(upCredential.getPasswordAsString(), owner.getPassword())) {
-                return new CredentialValidationResult(new UserCallerPrincipal(upCredential.getCaller(), owner.getId()),
+                return new CredentialValidationResult(new UserCallerPrincipal(upCredential.getCaller(), owner),
                         ROLES);
             }
         }

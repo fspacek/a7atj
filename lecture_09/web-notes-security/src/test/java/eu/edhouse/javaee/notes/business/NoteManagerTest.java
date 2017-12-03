@@ -45,7 +45,7 @@ public class NoteManagerTest {
         when(entityManager.createNamedQuery(anyString(), eq(Note.class)))
                 .thenReturn(query);
         when(query.getResultList()).thenReturn(asList(note("test 1"), note("test 2")));
-        final List<Note> all = instance.getAll();
+        final List<Note> all = instance.getAllForOwner(new Owner(1L));
 
         assertFalse(all.isEmpty());
         assertEquals(2, all.size());
