@@ -1,0 +1,19 @@
+.container {
+    max-width: 730px;
+}
+
+.header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.header .footer {
+    padding-right: 0;
+    padding-left: 0;
+}
+
+.footer{
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
