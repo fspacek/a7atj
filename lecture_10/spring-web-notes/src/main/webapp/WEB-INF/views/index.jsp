@@ -12,7 +12,7 @@
             <div class="panel panel-success">
                 <div class="panel-heading"><c:out value="${note.title}"/>   
                     <div class="pull-right">
-                         <a style="text-decoration: none" href="note/<c:out value='${note.id}'/>">
+                        <a style="text-decoration: none" href="note?id=<c:out value='${note.id}'/>">
                             <i class="material-icons">edit</i>
                         </a>
                         <a class="text-danger" href="note/<c:out value='${note.id}'/>/delete">

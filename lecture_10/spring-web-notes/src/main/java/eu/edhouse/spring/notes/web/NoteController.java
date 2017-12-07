@@ -24,21 +24,19 @@ public class NoteController {
     }
 
     @GetMapping
-    public String getEmptyForm(Model model) {
-        model.addAttribute("noteForm", new NoteForm());
-        return "note";
-    }
-
-    @GetMapping("{id}")
-    public String getEmptyForm(Model model, @PathVariable("id") long id) {
-        final Note note = noteManager.getOne(id);
-        model.addAttribute("noteForm", NoteForm.from(note));
+    public String getForm(Model model, @RequestParam(value = "id", required = false) Long id) {
+        if (id == null) {
+            model.addAttribute("noteForm", new NoteForm());
+        } else {
+            final Note note = noteManager.getOne(id);
+            model.addAttribute("form", NoteForm.from(note));
+        }
         return "note";
     }
 
     @Transactional
     @PostMapping
-    public String createOrUpdateNote(@ModelAttribute NoteForm noteForm) {
+    public String createOrUpdateNote(@ModelAttribute("form") NoteForm noteForm) {
         if (noteForm.getId() == null) {
             noteManager.create(NoteForm.toEntity(noteForm));
         } else {
@@ -52,7 +50,7 @@ public class NoteController {
     @GetMapping("{id}/delete")
     public String deleteNote(@PathVariable("id") long id){
         noteManager.delete(id);
-        return "redirect:home";
+        return "redirect:/home";
     }
 }
 
