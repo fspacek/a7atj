@@ -1,4 +1,4 @@
-# 9. Spring I - intro
+# 10. Spring framework I
 
 ## Spring Framework
 
