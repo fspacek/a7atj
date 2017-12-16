@@ -2,11 +2,15 @@ package eu.edhouse.spring.notes.web;
 
 import eu.edhouse.spring.notes.business.Note;
 import eu.edhouse.spring.notes.business.NoteManager;
+import eu.edhouse.spring.notes.business.Owner;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.EntityNotFoundException;
 
 
 /**
@@ -28,7 +32,7 @@ public class NoteController {
         if (id == null) {
             model.addAttribute("noteForm", new NoteForm());
         } else {
-            final Note note = noteManager.getOne(id);
+            final Note note = noteManager.getOne(id).orElseThrow(EntityNotFoundException::new);
             model.addAttribute("form", NoteForm.from(note));
         }
         return "note";
@@ -36,12 +40,10 @@ public class NoteController {
 
     @Transactional
     @PostMapping
-    public String createOrUpdateNote(@ModelAttribute("form") NoteForm noteForm) {
-        if (noteForm.getId() == null) {
-            noteManager.create(NoteForm.toEntity(noteForm));
-        } else {
-            noteManager.update(NoteForm.toEntity(noteForm));
-        }
+    public String createOrUpdateNote(@ModelAttribute("form") NoteForm noteForm, Authentication authentication) {
+        final Note note = NoteForm.toEntity(noteForm);
+        note.setOwner((Owner) authentication.getPrincipal());
+        noteManager.save(note);
         return "redirect:home";
     }
 

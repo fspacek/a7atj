@@ -2,9 +2,9 @@ package eu.edhouse.spring.notes.business;
 
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @author Frantisek Spacek
@@ -12,30 +12,25 @@ import java.util.List;
 @Service
 public class NoteManager {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    private final NoteRepository noteRepository;
 
-    public List<Note> getAll() {
-        return entityManager.createNamedQuery("Note.getAll", Note.class)
-                .getResultList();
+    public NoteManager(NoteRepository noteRepository) {
+        this.noteRepository = Objects.requireNonNull(noteRepository, "noteRepository must be provided");
     }
 
-    public Note getOne(long id) {
-        return entityManager.createNamedQuery("Note.getOne", Note.class)
-                .setParameter("id", id)
-                .getSingleResult();
+    public List<Note> getAllByOwner(Owner owner) {
+        return noteRepository.findAllByOwner(owner);
     }
 
-    public Note create(Note note) {
-        entityManager.persist(note);
-        return note;
+    public Optional<Note> getOne(long id) {
+        return noteRepository.findById(id);
     }
 
-    public void update(Note note) {
-        entityManager.merge(note);
+    public Note save(Note note) {
+        return noteRepository.save(note);
     }
 
     public void delete(long id) {
-        entityManager.remove(entityManager.find(Note.class, id));
+        noteRepository.deleteById(id);
     }
 }

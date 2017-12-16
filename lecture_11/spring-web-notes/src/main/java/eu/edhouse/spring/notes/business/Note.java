@@ -20,6 +20,9 @@ public class Note implements Serializable {
     private String title;
     private String text;
 
+    private Owner owner;
+
+
     @Id
     @GeneratedValue(generator = "note_seq")
     @SequenceGenerator(name = "note_seq", sequenceName = "NOTE_SEQ", allocationSize = 1)
@@ -50,6 +53,17 @@ public class Note implements Serializable {
     public void setText(String text) {
         this.text = text;
     }
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "USER_ID", nullable = false)
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
+
 
     @Override
     public int hashCode() {
