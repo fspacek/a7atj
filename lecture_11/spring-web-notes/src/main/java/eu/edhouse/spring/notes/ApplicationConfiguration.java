@@ -1,5 +1,7 @@
 package eu.edhouse.spring.notes;
 
+import net.ttddyy.dsproxy.listener.logging.SLF4JLogLevel;
+import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +41,11 @@ public class ApplicationConfiguration implements WebMvcConfigurer {
 
     @Bean
     public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder().setType(H2).build();
+        return ProxyDataSourceBuilder
+                .create(new EmbeddedDatabaseBuilder().setType(H2).build())
+                .logQueryBySlf4j(SLF4JLogLevel.DEBUG)
+                .countQuery()
+                .build();
     }
 
     @Bean

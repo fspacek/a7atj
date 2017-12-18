@@ -13,15 +13,26 @@
 <body>
 <div class="container">
     <div class="header clearfix">
-        <h3 class="text-muted">Notes</h3>
         <sec:authorize access="isAuthenticated()">
-            <div class="pull-right">
-                <c:url var="logoutUrl" value="/logout"/>
-                <form action="${logoutUrl}" id="logout" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}"
-                           value="${_csrf.token}"/>
-                </form>
-                <a class="btn btn-default" href="#" onclick="document.getElementById('logout').submit();">Logout</a>
-            </div>
-        </sec:authorize>
+        <nav style="margin-top: 5px">
+            <ul class="nav nav-pills pull-right">
+                <li>
+                    <a><sec:authentication property="principal.firstname"/>
+                        <sec:authentication property="principal.lastname"/></a>
+                </li>
+                <li>
+                    <c:url var="logoutUrl" value="/logout"/>
+                    <form action="${logoutUrl}" id="logout" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}"
+                               value="${_csrf.token}"/>
+                    </form>
+                    <button class="btn btn-default" href="#" onclick="document.getElementById('logout').submit();">
+                        Logout
+                    </button>
+                </li>
+            </ul>
+            </sec:authorize>
+        </nav>
+
+        <h3 class="text-muted">Notes</h3>
     </div>

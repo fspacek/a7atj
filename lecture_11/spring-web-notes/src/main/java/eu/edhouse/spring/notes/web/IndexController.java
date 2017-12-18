@@ -1,8 +1,6 @@
 package eu.edhouse.spring.notes.web;
 
 import eu.edhouse.spring.notes.business.NoteManager;
-import eu.edhouse.spring.notes.business.Owner;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,8 +22,8 @@ public class IndexController {
 
 
     @GetMapping({"/", "/home"})
-    public String getHome(Model model, Authentication authentication) {
-        model.addAttribute("notes", noteManager.getAllByOwner((Owner) authentication.getPrincipal()));
+    public String getHome(Model model) {
+        model.addAttribute("notes", noteManager.getAllByOwner());
         return "index";
     }
 

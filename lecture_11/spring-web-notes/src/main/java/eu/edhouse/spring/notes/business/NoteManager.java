@@ -18,8 +18,8 @@ public class NoteManager {
         this.noteRepository = Objects.requireNonNull(noteRepository, "noteRepository must be provided");
     }
 
-    public List<Note> getAllByOwner(Owner owner) {
-        return noteRepository.findAllByOwner(owner);
+    public List<Note> getAllByOwner() {
+        return noteRepository.findAllByOwner();
     }
 
     public Optional<Note> getOne(long id) {
